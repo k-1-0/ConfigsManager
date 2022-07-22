@@ -94,14 +94,14 @@ end;
 procedure RC6_Init(const pKey: P128bit);
 var
 xKeyD: Array[0..63] of DWORD;
-i, j, k, xKeyLen: Integer;
+i, j, k, n, xKeyLen: Integer;
 A, B: DWord;
 begin
 ZeroMemory(@xKeyD, Sizeof(xKeyD));
-PDWORD(@xKeyD)^:=pKey^[0];
-PDWORD(Cardinal(@xKeyD) + 4)^:=pKey^[1];
-PDWORD(Cardinal(@xKeyD) + 8)^:=pKey^[2];
-PDWORD(Cardinal(@xKeyD) + 12)^:=pKey^[3];
+xKeyD[0]:=pKey^[0];
+xKeyD[1]:=pKey^[1];
+xKeyD[2]:=pKey^[2];
+xKeyD[3]:=pKey^[3];
 
 //xKeyLen:=dwKeyLen shr 2;
 //if (dwKeyLen mod 4) <> 0 then inc(xKeyLen);
@@ -113,7 +113,7 @@ j:=0;
 A:=0;
 B:=0;
 if xKeyLen > (NUMROUNDS_2 + 4) then k:=xKeyLen * 3 else k:=(NUMROUNDS_2 + 4) * 3;
-for k:=1 to k do
+for n:=1 to k do
   begin
   A:=LRot32(KeyD[i] + A + B, 3);
   KeyD[i]:=A;

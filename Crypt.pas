@@ -27,13 +27,13 @@ const
 
 type
 
-  TByteArray = Array [0..0] of Byte;
+  TByteArray = packed Array [0..0] of Byte;
   PByteArray = ^TByteArray;
 
   T128bit = packed Array[0..3] of DWORD; // 128 bits
   P128bit = ^T128bit;
 
-  TSaltData = Array[0..SALT_SIZE - 1] of WideChar;
+  TSaltData = packed Array[0..SALT_SIZE - 1] of WideChar;
   PSaltData = ^TSaltData;
 
 function Crypt_ErrToStr(const dwErrorCode: DWORD): string;
