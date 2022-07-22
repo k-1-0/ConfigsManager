@@ -56,7 +56,7 @@ procedure Crypt_CryptMemory_CTR(const pData: Pointer; const dwSize: DWORD;
                                 const pIV: P128bit);
 
 procedure Crypt_Hash128(const pData: Pointer;
-                        const dwSize, dwIterationsCount: LongWord;
+                        const dwSize, dwIterationsCount: DWORD;
                         const pHash: P128bit);
 
 function Crypt_GenerateRndStrW(const Len: Integer): WideString;
@@ -213,7 +213,7 @@ end;
 
 
 procedure Crypt_Hash128(const pData: Pointer;
-                        const dwSize, dwIterationsCount: LongWord;
+                        const dwSize, dwIterationsCount: DWORD;
                         const pHash: P128bit);
 begin
 Hash_128(pData, dwSize, dwIterationsCount, pHash);
@@ -227,11 +227,11 @@ const
      'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
      '1','2','3','4','5','6','7','8','9','0');
 var
-i, j: Integer;
+i, j: DWORD;
 begin
 SetLength(result, Len);
 i:=1;
-while i <= Len do
+while i <= DWORD(Len) do
   begin
   RtlGenRandom(@j, SizeOf(j));
   j:=j AND $000000FF;
